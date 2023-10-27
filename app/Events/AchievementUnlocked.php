@@ -10,6 +10,9 @@ class AchievementUnlocked
 {
     use Dispatchable, SerializesModels;
 
+    public $achievementName;
+    public $user;
+
     /**
      * Create a new event instance.
      */

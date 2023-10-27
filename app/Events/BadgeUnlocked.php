@@ -10,6 +10,9 @@ class BadgeUnlocked
 {
     use Dispatchable, SerializesModels;
 
+    public $badgeName;
+    public $user;
+
     /**
      * Create a new event instance.
      */
