@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\LessonWatched;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Enums\LessonsWatchedAchievement;
+use App\Events\AchievementUnlocked;
 
 class CheckForNewLessonAchievement
 {
@@ -23,5 +23,11 @@ class CheckForNewLessonAchievement
     {
         $lesson = $event->lesson;
         $user = $event->user;
+
+        $newAchievement = LessonsWatchedAchievement::tryFrom($user->lessons()->count());
+
+        if ($newAchievement) {
+            AchievementUnlocked::dispatch($newAchievement->getTitle(), $user);
+        }
     }
 }

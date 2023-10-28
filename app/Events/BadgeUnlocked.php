@@ -18,6 +18,7 @@ class BadgeUnlocked
      */
     public function __construct(string $badgeName, User $user)
     {
-        //
+        $this->badgeName = $badgeName;
+        $this->user = $user;
     }
 }
