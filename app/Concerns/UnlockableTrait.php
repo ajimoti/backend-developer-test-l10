@@ -13,7 +13,7 @@ trait UnlockableTrait
      */
     public function getAllUnlocked(): array
     {
-        $allAchievements = collect(self::cases());
+        $allAchievements = collect(static::cases());
 
         $unlocked = $allAchievements->filter(function ($achievement) {
             return $achievement->value <= $this->value;
@@ -25,11 +25,11 @@ trait UnlockableTrait
     /**
      * Get the next achievement.
      *
-     * @return self|null
+     * @return static|null
      */
-    public function getNext(): ?self
+    public function getNext(): ?static
     {
-        $allAchievements = collect(self::cases());
+        $allAchievements = collect(static::cases());
 
         $next = $allAchievements->filter(function ($achievement) {
             return $achievement->value > $this->value;

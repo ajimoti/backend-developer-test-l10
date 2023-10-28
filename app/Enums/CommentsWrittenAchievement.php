@@ -10,12 +10,12 @@ enum CommentsWrittenAchievement: int implements AchieveableInterface
     use UnlockableTrait;
 
     // ================================================================================
-    // NOTE: For consistency, the badges should be listed in hierarchical order,
+    // NOTE: For consistency, the achievements should be listed in hierarchical order,
     // from the lowest to the highest.
     // ================================================================================
 
     case FIRST = 1;
-    case THREE = 3;
+    case THIRD = 3;
     case FIFTH = 5;
     case TENTH = 10;
     case TWENTIETH = 20;
@@ -33,7 +33,7 @@ enum CommentsWrittenAchievement: int implements AchieveableInterface
         }
 
         if ($value >= 3 && $value < 5) {
-            return self::THREE;
+            return self::THIRD;
         }
 
         if ($value >= 5 && $value < 10) {
@@ -60,7 +60,7 @@ enum CommentsWrittenAchievement: int implements AchieveableInterface
     {
         return match ($this) {
             self::FIRST => 'First Comment Written',
-            self::THREE => '3 Comments Written',
+            self::THIRD => '3 Comments Written',
             self::FIFTH => '5 Comments Written',
             self::TENTH => '10 Comments Written',
             self::TWENTIETH => '20 Comments Written',

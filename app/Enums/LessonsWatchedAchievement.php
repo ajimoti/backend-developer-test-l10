@@ -10,7 +10,7 @@ enum LessonsWatchedAchievement: int implements AchieveableInterface
     use UnlockableTrait;
 
     // ================================================================================
-    // NOTE: For consistency, the badges should be listed in hierarchical order,
+    // NOTE: For consistency, the achievements should be listed in hierarchical order,
     // from the lowest to the highest.
     // ================================================================================
 
