@@ -11,6 +11,8 @@ use App\Enums\LessonsWatchedAchievement;
 use App\Enums\CommentsWrittenAchievement;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Enums\Badges;
+use App\Collections\AchievementCollection;
 
 class User extends Authenticatable
 {
@@ -73,6 +75,8 @@ class User extends Authenticatable
 
     /**
      * The lessons watched achievement.
+     *
+     * @return LessonsWatchedAchievement|null
      */
     public function lessonAchievement(): ?LessonsWatchedAchievement
     {
@@ -83,12 +87,99 @@ class User extends Authenticatable
 
     /**
      * The comments written achievement.
+     *
+     * @return CommentsWrittenAchievement|null
      */
     public function commentAchievement(): ?CommentsWrittenAchievement
     {
         $totalComments = $this->comments()->count();
 
         return CommentsWrittenAchievement::make($totalComments);
+    }
+
+    /**
+     * All the unlocked lesson achievements.
+     *
+     * @return AchievementCollection
+     */
+    public function unlockedLessonAchievements(): AchievementCollection
+    {
+        return $this->lessonAchievement()->getAllUnlocked();
+    }
+
+    /**
+     * All the unlocked comment achievements.
+     *
+     * @return AchievementCollection
+     */
+    public function unlockedCommentAchievements(): AchievementCollection
+    {
+        return $this->commentAchievement()->getAllUnlocked();
+    }
+
+    /**
+     * All the unlocked achievements.
+     *
+     * @return AchievementCollection
+     */
+    public function unlockedAchievements(): AchievementCollection
+    {
+        return $this->unlockedLessonAchievements()->merge($this->unlockedCommentAchievements());
+    }
+
+    /**
+     * The next available lesson achievement.
+     *
+     * @return LessonsWatchedAchievement|null
+     */
+    public function nextLessonAchievement(): ?LessonsWatchedAchievement
+    {
+        return $this->lessonAchievement()->getNext();
+    }
+
+    /**
+     * The next available comment achievement.
+     *
+     * @return CommentsWrittenAchievement|null
+     */
+    public function nextCommentAchievement(): ?CommentsWrittenAchievement
+    {
+        return $this->commentAchievement()->getNext();
+    }
+
+    /**
+     * The next available achievements.
+     *
+     * @return AchievementCollection
+     */
+    public function nextAchievements(): AchievementCollection
+    {
+        return new AchievementCollection([
+            $this->nextLessonAchievement(),
+            $this->nextCommentAchievement()
+        ]);
+    }
+
+    /**
+     * The user's current badge.
+     *
+     * @return Badges
+     */
+    public function badge(): Badges
+    {
+        $totalUnlockedAchievements = $this->unlockedAchievements()->count();
+
+        return Badges::make($totalUnlockedAchievements);
+    }
+
+    /**
+     * The next available badge.
+     *
+     * @return Badges|null
+     */
+    public function nextBadge(): ?Badges
+    {
+        return $this->badge()->getNext();
     }
 }
 

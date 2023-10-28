@@ -2,6 +2,8 @@
 
 namespace App\Concerns;
 
+use App\Collections\AchievementCollection;
+
 trait UnlockableTrait
 {
     abstract public static function cases(): array;
@@ -9,17 +11,17 @@ trait UnlockableTrait
     /**
      * Get all the unlocked achievements.
      *
-     * @return array
+     * @return AchievementCollection
      */
-    public function getAllUnlocked(): array
+    public function getAllUnlocked(): AchievementCollection
     {
-        $allAchievements = collect(static::cases());
+        $allAchievements = new AchievementCollection(static::cases());
 
         $unlocked = $allAchievements->filter(function ($achievement) {
             return $achievement->value <= $this->value;
         });
 
-        return $unlocked->toArray();
+        return $unlocked;
     }
 
     /**
@@ -36,5 +38,21 @@ trait UnlockableTrait
         })->first();
 
         return $next;
+    }
+
+    /**
+     * Get the remaining value to unlock the next achievement.
+     *
+     * @return integer
+     */
+    public function getRemainingToUnlockNext(): int
+    {
+        $next = $this->getNext();
+
+        if (! $next) {
+            return 0;
+        }
+
+        return $next->value - $this->value;
     }
 }

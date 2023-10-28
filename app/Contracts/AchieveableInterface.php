@@ -2,6 +2,8 @@
 
 namespace App\Contracts;
 
+use App\Collections\AchievementCollection;
+
 interface AchieveableInterface
 {
     /*  Make an instance of the enum based on the given value.
@@ -20,9 +22,9 @@ interface AchieveableInterface
     /**
      * Get all the unlocked achievements.
      *
-     * @return array
+     * @return AchievementCollection
      */
-    public function getAllUnlocked(): array;
+    public function getAllUnlocked(): AchievementCollection;
 
     /**
      * Get the next achievement.
@@ -30,4 +32,11 @@ interface AchieveableInterface
      * @return static|null
      */
     public function getNext(): ?static;
+
+    /**
+     * Get the remaining value to unlock the next achievement.
+     *
+     * @return integer
+     */
+    public function getRemainingToUnlockNext(): int;
 }

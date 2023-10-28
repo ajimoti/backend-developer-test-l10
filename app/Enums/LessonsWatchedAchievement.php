@@ -24,9 +24,9 @@ enum LessonsWatchedAchievement: int implements AchieveableInterface
      * Make an instance of the enum based on the given value.
      *
      * @param integer $value
-     * @return self|null
+     * @return static|null
      */
-    public static function make(int $value): ?self
+    public static function make(int $value): ?static
     {
         if ($value >= 1 && $value < 5) {
             return self::FIRST;
