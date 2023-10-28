@@ -9,9 +9,9 @@ interface AchieveableInterface
     /*  Make an instance of the enum based on the given value.
      *
      *  @param integer $value
-     *  @return static|null
+     *  @return self|null
      */
-    public static function make(int $value): ?static;
+    public static function make(int $value): ?self;
 
     /*  Get the title of the badge.
      *
@@ -29,9 +29,9 @@ interface AchieveableInterface
     /**
      * Get the next achievement.
      *
-     * @return static|null
+     * @return self|null
      */
-    public function getNext(): ?static;
+    public function getNext(): ?self;
 
     /**
      * Get the remaining value to unlock the next achievement.
