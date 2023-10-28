@@ -5,7 +5,7 @@ namespace App\Enums;
 use App\Contracts\AchieveableInterface;
 use App\Concerns\UnlockableTrait;
 
-enum Badges: int implements AchieveableInterface
+enum Badge: int implements AchieveableInterface
 {
     use UnlockableTrait;
 

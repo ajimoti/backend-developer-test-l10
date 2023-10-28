@@ -11,7 +11,7 @@ use App\Enums\LessonsWatchedAchievement;
 use App\Enums\CommentsWrittenAchievement;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Enums\Badges;
+use App\Enums\Badge;
 use App\Collections\AchievementCollection;
 
 class User extends Authenticatable
@@ -163,21 +163,21 @@ class User extends Authenticatable
     /**
      * The user's current badge.
      *
-     * @return Badges
+     * @return Badge
      */
-    public function badge(): Badges
+    public function badge(): Badge
     {
         $totalUnlockedAchievements = $this->unlockedAchievements()->count();
 
-        return Badges::make($totalUnlockedAchievements);
+        return Badge::make($totalUnlockedAchievements);
     }
 
     /**
      * The next available badge.
      *
-     * @return Badges|null
+     * @return Badge|null
      */
-    public function nextBadge(): ?Badges
+    public function nextBadge(): ?Badge
     {
         return $this->badge()->getNext();
     }

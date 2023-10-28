@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AchievementUnlocked;
-use App\Enums\Badges;
+use App\Enums\Badge;
 use App\Events\BadgeUnlocked;
 
 class CheckForNewBadge
@@ -24,7 +24,7 @@ class CheckForNewBadge
         $achievementName = $event->achievementName;
         $user = $event->user;
 
-        $newBadge = Badges::tryFrom($user->unlockedAchievements()->count());
+        $newBadge = Badge::tryFrom($user->unlockedAchievements()->count());
 
         if ($newBadge) {
             BadgeUnlocked::dispatch($newBadge->getTitle(), $user);
