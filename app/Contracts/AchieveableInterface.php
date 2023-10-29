@@ -32,11 +32,4 @@ interface AchieveableInterface
      * @return self|null
      */
     public function getNext(): ?self;
-
-    /**
-     * Get the remaining value to unlock the next achievement.
-     *
-     * @return integer
-     */
-    public function getRemainingToUnlockNext(): int;
 }

@@ -208,5 +208,14 @@ class User extends Authenticatable
     {
         return $this->badge()->getNext();
     }
+
+    public function getTotalAchievementsNeededToUnlockNextBadge(): int
+    {
+        $nextBadge = $this->badge()->getNext();
+
+        $totalUnlockedAchievements = $this->unlockedAchievements()->count();
+
+        return $nextBadge->value - $totalUnlockedAchievements;
+    }
 }
 

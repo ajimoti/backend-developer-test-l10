@@ -39,20 +39,4 @@ trait UnlockableTrait
 
         return $next;
     }
-
-    /**
-     * Get the remaining value to unlock the next achievement.
-     *
-     * @return integer
-     */
-    public function getRemainingToUnlockNext(): int
-    {
-        $next = $this->getNext();
-
-        if (! $next) {
-            return 0;
-        }
-
-        return $next->value - $this->value;
-    }
 }

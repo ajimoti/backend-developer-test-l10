@@ -141,32 +141,6 @@ class BadgeTest extends TestCase
     }
 
     /**
-     * Test that getRemainingToUnlockNext returns the correct value.
-     */
-    public function test_getRemainingToUnlockNext_returns_the_correct_value(): void
-    {
-        // BEGINNER
-        $this->assertEquals(4, Badge::BEGINNER->getRemainingToUnlockNext());
-
-        // INTERMEDIATE
-        $this->assertEquals(4, Badge::INTERMEDIATE->getRemainingToUnlockNext());
-
-        // ADVANCED
-        $this->assertEquals(2, Badge::ADVANCED->getRemainingToUnlockNext());
-
-        // MASTER
-        $this->assertEquals(0, Badge::MASTER->getRemainingToUnlockNext());
-    }
-
-    /**
-     * Test that the getRemainingToUnlockNext method returns 0 when there are no more badges to unlock.
-     */
-    public function test_getRemainingToUnlockNext_returns_zero_when_there_are_no_more_achievements_to_unlock(): void
-    {
-        $this->assertEquals(0, Badge::MASTER->getRemainingToUnlockNext());
-    }
-
-    /**
      * Test that getAllUnlocked returns an instance of AchievementCollection.
      */
     public function test_get_unlocked_badges_returns_an_instance_of_achievement_collection(): void

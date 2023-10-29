@@ -155,35 +155,6 @@ class CommentsWrittenAchievementTest extends TestCase
     }
 
     /**
-     * Test that the getRemainingToUnlockNext method returns the correct value.
-     */
-    public function test_that_getRemainingToUnlockNext_returns_the_correct_value(): void
-    {
-        // FIRST
-        $this->assertEquals(2, CommentsWrittenAchievement::FIRST->getRemainingToUnlockNext());
-
-        // THIRD
-        $this->assertEquals(2, CommentsWrittenAchievement::THIRD->getRemainingToUnlockNext());
-
-        // FIFTH
-        $this->assertEquals(5, CommentsWrittenAchievement::FIFTH->getRemainingToUnlockNext());
-
-        // TENTH
-        $this->assertEquals(10, CommentsWrittenAchievement::TENTH->getRemainingToUnlockNext());
-
-        // TWENTIETH
-        $this->assertEquals(0, CommentsWrittenAchievement::TWENTIETH->getRemainingToUnlockNext());
-    }
-
-    /**
-     * Test that the getRemainingToUnlockNext method returns 0 when there are no more achievements to unlock.
-     */
-    public function test_that_getRemainingToUnlockNext_returns_zero_when_there_are_no_more_achievements_to_unlock(): void
-    {
-        $this->assertEquals(0, CommentsWrittenAchievement::TWENTIETH->getRemainingToUnlockNext());
-    }
-
-    /**
      * Test that getAllUnlocked returns an instance of AchievementCollection.
      */
     public function test_that_getAllUnlocked_returns_an_instance_of_AchievementCollection(): void

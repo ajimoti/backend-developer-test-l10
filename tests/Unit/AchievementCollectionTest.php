@@ -35,13 +35,11 @@ class AchievementCollectionTest extends TestCase
                 'name' => 'FIRST',
                 'title' => 'First Comment Written',
                 'value' => 1,
-                'remaining_to_unlock_next' => 2,
             ],
             [
                 'name' => 'FIRST',
                 'title' => 'First Lesson Watched',
                 'value' => 1,
-                'remaining_to_unlock_next' => 4,
             ],
         ], $collection->castToArray());
     }

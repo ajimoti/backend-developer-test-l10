@@ -25,7 +25,6 @@ class AchievementCollection extends Collection
                 'name' => $achievement->name,
                 'title' => $achievement->getTitle(),
                 'value' => $achievement->value,
-                'remaining_to_unlock_next' => $achievement->getRemainingToUnlockNext(),
             ];
         })->toArray();
 
