@@ -3,15 +3,12 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use App\Listeners\CheckForNewCommentAchievement;
 use App\Events\CommentWritten;
 
 class CommentWrittenTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * Test that the CommentWritten event triggers it listeners when dispatched
      */

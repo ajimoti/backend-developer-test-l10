@@ -5,13 +5,10 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Events\AchievementUnlocked;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Listeners\CheckForNewBadge;
 
 class AchievementUnlockedTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * Test that the AchievementUnlocked event triggers it listeners when dispatched
      */
