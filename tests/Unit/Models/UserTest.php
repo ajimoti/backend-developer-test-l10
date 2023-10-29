@@ -126,9 +126,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement.
+     * Test that the latest lesson achievement method returns the correct achievement.
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_achievement(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_achievement(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -141,9 +141,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement for first
+     * Test that the latest lesson achievement method returns the correct achievement for first
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_for_first(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_for_first(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -158,9 +158,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement for fifth.
+     * Test that the latest lesson achievement method returns the correct achievement for fifth.
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_fifth(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_achievement_for_fifth(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -177,9 +177,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement for tenth.
+     * Test that the latest lesson achievement method returns the correct achievement for tenth.
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_tenth(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_achievement_for_tenth(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -196,9 +196,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement for twenty fifth.
+     * Test that the latest lesson achievement method returns the correct achievement for twenty fifth.
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_twenty_fifth(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_achievement_for_twenty_fifth(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -215,9 +215,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement for fiftieth.
+     * Test that the latest lesson achievement method returns the correct achievement for fiftieth.
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_fiftieth(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_achievement_for_fiftieth(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -234,9 +234,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current lesson achievement method returns the correct achievement when the user has watched more than one lesson, and has already unlocked the highest achievement.
+     * Test that the latest lesson achievement method returns the correct achievement when the user has watched more than one lesson, and has already unlocked the highest achievement.
      */
-    public function test_current_lesson_achievement_method_returns_the_correct_achievement_when_the_user_has_watched_more_than_one_lesson_and_has_already_unlocked_the_highest_achievement(): void
+    public function test_latest_lesson_achievement_method_returns_the_correct_achievement_when_the_user_has_watched_more_than_one_lesson_and_has_already_unlocked_the_highest_achievement(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestLessonAchievement());
@@ -249,9 +249,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current comment achievement method returns the correct achievement.
+     * Test that the latest comment achievement method returns the correct achievement.
      */
-    public function test_current_comment_achievement_method_returns_the_correct_achievement(): void
+    public function test_latest_comment_achievement_method_returns_the_correct_achievement(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestCommentAchievement());
@@ -265,9 +265,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current comment achievement method returns the correct achievement when the user has written more than one comment.
+     * Test that the latest comment achievement method returns the correct achievement when the user has written more than one comment.
      */
-    public function test_current_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_written_more_than_one_comment(): void
+    public function test_latest_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_written_more_than_one_comment(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestCommentAchievement());
@@ -281,9 +281,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test that the current comment achievement method returns the correct achievement when the user has written more than one comment, and has already unlocked the highest achievement.
+     * Test that the latest comment achievement method returns the correct achievement when the user has written more than one comment, and has already unlocked the highest achievement.
      */
-    public function test_current_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_written_more_than_one_comment_and_has_already_unlocked_the_highest_achievement(): void
+    public function test_latest_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_written_more_than_one_comment_and_has_already_unlocked_the_highest_achievement(): void
     {
         $user = User::factory()->create();
         $this->assertNull($user->latestCommentAchievement());
