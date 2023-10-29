@@ -74,11 +74,11 @@ class User extends Authenticatable
     }
 
     /**
-     * The lessons watched achievement.
+     * The current lessons watched achievement.
      *
      * @return LessonsWatchedAchievement|null
      */
-    public function lessonAchievement(): ?LessonsWatchedAchievement
+    public function currentLessonAchievement(): ?LessonsWatchedAchievement
     {
         $totalWatched = $this->watched()->count();
 
@@ -86,11 +86,11 @@ class User extends Authenticatable
     }
 
     /**
-     * The comments written achievement.
+     * The current comments written achievement.
      *
      * @return CommentsWrittenAchievement|null
      */
-    public function commentAchievement(): ?CommentsWrittenAchievement
+    public function currentCommentAchievement(): ?CommentsWrittenAchievement
     {
         $totalComments = $this->comments()->count();
 
@@ -104,7 +104,9 @@ class User extends Authenticatable
      */
     public function unlockedLessonAchievements(): AchievementCollection
     {
-        return $this->lessonAchievement()->getAllUnlocked();
+        $unlockedAchievements = $this->currentLessonAchievement()?->getAllUnlocked();
+
+        return $unlockedAchievements ?? new AchievementCollection();
     }
 
     /**
@@ -114,7 +116,9 @@ class User extends Authenticatable
      */
     public function unlockedCommentAchievements(): AchievementCollection
     {
-        return $this->commentAchievement()->getAllUnlocked();
+        $unlockedAchievements = $this->currentCommentAchievement()?->getAllUnlocked();
+
+        return $unlockedAchievements ?? new AchievementCollection();
     }
 
     /**
@@ -124,7 +128,9 @@ class User extends Authenticatable
      */
     public function unlockedAchievements(): AchievementCollection
     {
-        return $this->unlockedLessonAchievements()->merge($this->unlockedCommentAchievements());
+        $unlockedAchievements = $this->unlockedLessonAchievements()?->merge($this->unlockedCommentAchievements());
+
+        return $unlockedAchievements ?? new AchievementCollection();
     }
 
     /**
@@ -134,7 +140,14 @@ class User extends Authenticatable
      */
     public function nextLessonAchievement(): ?LessonsWatchedAchievement
     {
-        return $this->lessonAchievement()->getNext();
+        $currentAchievement = $this->currentLessonAchievement();
+
+        if ($currentAchievement) {
+            return $currentAchievement->getNext();
+        }
+
+        // If there are no unlocked achievements, return the first one.
+        return LessonsWatchedAchievement::FIRST;
     }
 
     /**
@@ -144,20 +157,34 @@ class User extends Authenticatable
      */
     public function nextCommentAchievement(): ?CommentsWrittenAchievement
     {
-        return $this->commentAchievement()->getNext();
+        $currentAchievement = $this->currentCommentAchievement();
+
+        if ($currentAchievement) {
+            return $currentAchievement->getNext();
+        }
+
+        // If there are no unlocked achievements, return the first one.
+        return CommentsWrittenAchievement::FIRST;
     }
 
     /**
-     * The next available achievements.
+     * All available next achievements.
      *
      * @return AchievementCollection
      */
     public function nextAchievements(): AchievementCollection
     {
-        return new AchievementCollection([
-            $this->nextLessonAchievement(),
-            $this->nextCommentAchievement()
-        ]);
+        $nextAchievements = [];
+
+        if ($this->nextLessonAchievement()) {
+            $nextAchievements[] = $this->nextLessonAchievement();
+        }
+
+        if ($this->nextCommentAchievement()) {
+            $nextAchievements[] = $this->nextCommentAchievement();
+        }
+
+        return new AchievementCollection($nextAchievements);
     }
 
     /**
