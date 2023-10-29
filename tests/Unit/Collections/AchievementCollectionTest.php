@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Collections;
 
 use PHPUnit\Framework\TestCase;
 use App\Collections\AchievementCollection;

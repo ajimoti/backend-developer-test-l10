@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Events;
 
 use Tests\TestCase;
 use App\Events\AchievementUnlocked;

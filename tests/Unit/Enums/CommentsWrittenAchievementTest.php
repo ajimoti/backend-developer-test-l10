@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Enums;
 
 use PHPUnit\Framework\TestCase;
 use App\Enums\CommentsWrittenAchievement;

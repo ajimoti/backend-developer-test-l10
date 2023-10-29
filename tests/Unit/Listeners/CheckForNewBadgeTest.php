@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Listeners;
 
 use App\Events\BadgeUnlocked;
 use App\Models\User;
