@@ -78,7 +78,7 @@ class CommentsWrittenAchievementTest extends TestCase
         }
 
         // TWENTIETH
-        foreach (range(20, 29) as $i) {
+        foreach (range(20, 30) as $i) {
             $this->assertEquals(CommentsWrittenAchievement::TWENTIETH, CommentsWrittenAchievement::make($i));
         }
 

@@ -131,13 +131,13 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_achievement(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         $lesson = Lesson::factory()->create();
         $user->lessons()->attach($lesson, ['watched' => true]);
 
-        $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->currentLessonAchievement());
-        $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->latestLessonAchievement());
+        $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
     }
 
     /**
@@ -146,14 +146,14 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_for_first(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         foreach (range(1, 4) as $i) {
             $lesson = Lesson::factory()->create();
             $user->lessons()->attach($lesson, ['watched' => true]);
 
-            $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->currentLessonAchievement());
-            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+            $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->latestLessonAchievement());
+            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
         }
     }
 
@@ -163,7 +163,7 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_fifth(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         $lesson = Lesson::factory()->count(5)->create();
         $user->lessons()->attach($lesson, ['watched' => true]);
@@ -171,8 +171,8 @@ class UserTest extends TestCase
         foreach (range(6, 9) as $i) {
             $lesson = Lesson::factory()->create();
             $user->lessons()->attach($lesson, ['watched' => true]);
-            $this->assertEquals(LessonsWatchedAchievement::FIFTH, $user->currentLessonAchievement());
-            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+            $this->assertEquals(LessonsWatchedAchievement::FIFTH, $user->latestLessonAchievement());
+            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
         }
     }
 
@@ -182,7 +182,7 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_tenth(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         $lesson = Lesson::factory()->count(10)->create();
         $user->lessons()->attach($lesson, ['watched' => true]);
@@ -190,8 +190,8 @@ class UserTest extends TestCase
         foreach (range(11, 24) as $i) {
             $lesson = Lesson::factory()->create();
             $user->lessons()->attach($lesson, ['watched' => true]);
-            $this->assertEquals(LessonsWatchedAchievement::TENTH, $user->currentLessonAchievement());
-            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+            $this->assertEquals(LessonsWatchedAchievement::TENTH, $user->latestLessonAchievement());
+            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
         }
     }
 
@@ -201,7 +201,7 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_twenty_fifth(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         $lesson = Lesson::factory()->count(25)->create();
         $user->lessons()->attach($lesson, ['watched' => true]);
@@ -209,8 +209,8 @@ class UserTest extends TestCase
         foreach (range(26, 49) as $i) {
             $lesson = Lesson::factory()->create();
             $user->lessons()->attach($lesson, ['watched' => true]);
-            $this->assertEquals(LessonsWatchedAchievement::TWENTY_FIFTH, $user->currentLessonAchievement());
-            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+            $this->assertEquals(LessonsWatchedAchievement::TWENTY_FIFTH, $user->latestLessonAchievement());
+            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
         }
     }
 
@@ -220,7 +220,7 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_achievement_for_fiftieth(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         $lesson = Lesson::factory()->count(50)->create();
         $user->lessons()->attach($lesson, ['watched' => true]);
@@ -228,8 +228,8 @@ class UserTest extends TestCase
         foreach (range(51, 79) as $i) {
             $lesson = Lesson::factory()->create();
             $user->lessons()->attach($lesson, ['watched' => true]);
-            $this->assertEquals(LessonsWatchedAchievement::FIFTIETH, $user->currentLessonAchievement());
-            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+            $this->assertEquals(LessonsWatchedAchievement::FIFTIETH, $user->latestLessonAchievement());
+            $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
         }
     }
 
@@ -239,13 +239,13 @@ class UserTest extends TestCase
     public function test_current_lesson_achievement_method_returns_the_correct_achievement_when_the_user_has_watched_more_than_one_lesson_and_has_already_unlocked_the_highest_achievement(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentLessonAchievement());
+        $this->assertNull($user->latestLessonAchievement());
 
         $lessons = Lesson::factory()->count(80)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
 
-        $this->assertEquals(LessonsWatchedAchievement::FIFTIETH, $user->currentLessonAchievement());
-        $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->currentLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIFTIETH, $user->latestLessonAchievement());
+        $this->assertInstanceOf(LessonsWatchedAchievement::class, $user->latestLessonAchievement());
     }
 
     /**
@@ -254,14 +254,14 @@ class UserTest extends TestCase
     public function test_current_comment_achievement_method_returns_the_correct_achievement(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentCommentAchievement());
+        $this->assertNull($user->latestCommentAchievement());
 
         $comment = Comment::factory()->create([
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::FIRST, $user->currentCommentAchievement());
-        $this->assertInstanceOf(CommentsWrittenAchievement::class, $user->currentCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::FIRST, $user->latestCommentAchievement());
+        $this->assertInstanceOf(CommentsWrittenAchievement::class, $user->latestCommentAchievement());
     }
 
     /**
@@ -270,14 +270,14 @@ class UserTest extends TestCase
     public function test_current_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_written_more_than_one_comment(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentCommentAchievement());
+        $this->assertNull($user->latestCommentAchievement());
 
         $comments = Comment::factory()->count(3)->create([
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::THIRD, $user->currentCommentAchievement());
-        $this->assertInstanceOf(CommentsWrittenAchievement::class, $user->currentCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::THIRD, $user->latestCommentAchievement());
+        $this->assertInstanceOf(CommentsWrittenAchievement::class, $user->latestCommentAchievement());
     }
 
     /**
@@ -286,14 +286,14 @@ class UserTest extends TestCase
     public function test_current_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_written_more_than_one_comment_and_has_already_unlocked_the_highest_achievement(): void
     {
         $user = User::factory()->create();
-        $this->assertNull($user->currentCommentAchievement());
+        $this->assertNull($user->latestCommentAchievement());
 
         $comments = Comment::factory()->count(20)->create([
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::TWENTIETH, $user->currentCommentAchievement());
-        $this->assertInstanceOf(CommentsWrittenAchievement::class, $user->currentCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::TWENTIETH, $user->latestCommentAchievement());
+        $this->assertInstanceOf(CommentsWrittenAchievement::class, $user->latestCommentAchievement());
     }
 
     /**
@@ -526,31 +526,31 @@ class UserTest extends TestCase
     public function test_next_lesson_achievement_method_returns_the_correct_achievement(): void
     {
         $user = User::factory()->create();
-        $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->nextLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->nextAvailableLessonAchievement());
 
         $lessons = Lesson::factory()->count(1)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
-        $this->assertEquals(LessonsWatchedAchievement::FIFTH, $user->nextLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIFTH, $user->nextAvailableLessonAchievement());
 
         $user = User::factory()->create();
         $lessons = Lesson::factory()->count(5)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
-        $this->assertEquals(LessonsWatchedAchievement::TENTH, $user->nextLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::TENTH, $user->nextAvailableLessonAchievement());
 
         $user = User::factory()->create();
         $lessons = Lesson::factory()->count(10)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
-        $this->assertEquals(LessonsWatchedAchievement::TWENTY_FIFTH, $user->nextLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::TWENTY_FIFTH, $user->nextAvailableLessonAchievement());
 
         $user = User::factory()->create();
         $lessons = Lesson::factory()->count(25)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
-        $this->assertEquals(LessonsWatchedAchievement::FIFTIETH, $user->nextLessonAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIFTIETH, $user->nextAvailableLessonAchievement());
 
         $user = User::factory()->create();
         $lessons = Lesson::factory()->count(50)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
-        $this->assertNull($user->nextLessonAchievement());
+        $this->assertNull($user->nextAvailableLessonAchievement());
     }
 
     /**
@@ -562,7 +562,7 @@ class UserTest extends TestCase
         $lessons = Lesson::factory()->count(90)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
 
-        $this->assertNull($user->nextLessonAchievement());
+        $this->assertNull($user->nextAvailableLessonAchievement());
     }
 
     /**
@@ -571,7 +571,7 @@ class UserTest extends TestCase
     public function test_next_comment_achievement_method_returns_the_correct_achievement_when_the_user_has_no_comments(): void
     {
         $user = User::factory()->create();
-        $this->assertEquals(CommentsWrittenAchievement::FIRST, $user->nextCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::FIRST, $user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -584,7 +584,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::THIRD, $user->nextCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::THIRD, $user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -597,7 +597,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::FIFTH, $user->nextCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::FIFTH, $user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -610,7 +610,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::TENTH, $user->nextCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::TENTH, $user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -623,7 +623,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(CommentsWrittenAchievement::TWENTIETH, $user->nextCommentAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::TWENTIETH, $user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -636,7 +636,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertNull($user->nextCommentAchievement());
+        $this->assertNull($user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -649,7 +649,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertNull($user->nextCommentAchievement());
+        $this->assertNull($user->nextAvailableCommentAchievement());
     }
 
     /**
@@ -661,7 +661,7 @@ class UserTest extends TestCase
         $this->assertEquals(new AchievementCollection([
             LessonsWatchedAchievement::FIRST,
             CommentsWrittenAchievement::FIRST,
-        ]), $user->nextAchievements());
+        ]), $user->nextAvailableAchievements());
     }
 
     /**
@@ -679,12 +679,12 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->currentLessonAchievement());
-        $this->assertEquals(CommentsWrittenAchievement::FIRST, $user->currentCommentAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIRST, $user->latestLessonAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::FIRST, $user->latestCommentAchievement());
         $this->assertEquals(new AchievementCollection([
             LessonsWatchedAchievement::FIFTH,
             CommentsWrittenAchievement::THIRD,
-        ]), $user->nextAchievements());
+        ]), $user->nextAvailableAchievements());
 
 
         // ==============================================
@@ -697,12 +697,12 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(LessonsWatchedAchievement::FIFTH, $user->currentLessonAchievement());
-        $this->assertEquals(CommentsWrittenAchievement::THIRD, $user->currentCommentAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::FIFTH, $user->latestLessonAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::THIRD, $user->latestCommentAchievement());
         $this->assertEquals(new AchievementCollection([
             LessonsWatchedAchievement::TENTH,
             CommentsWrittenAchievement::FIFTH,
-        ]), $user->nextAchievements());
+        ]), $user->nextAvailableAchievements());
 
 
         // ==============================================
@@ -715,12 +715,12 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(LessonsWatchedAchievement::TENTH, $user->currentLessonAchievement());
-        $this->assertEquals(CommentsWrittenAchievement::FIFTH, $user->currentCommentAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::TENTH, $user->latestLessonAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::FIFTH, $user->latestCommentAchievement());
         $this->assertEquals(new AchievementCollection([
             LessonsWatchedAchievement::TWENTY_FIFTH,
             CommentsWrittenAchievement::TENTH,
-        ]), $user->nextAchievements());
+        ]), $user->nextAvailableAchievements());
 
         // ==============================================
         // Twenty fifth lesson watched, tenth comment written
@@ -732,12 +732,12 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(LessonsWatchedAchievement::TWENTY_FIFTH, $user->currentLessonAchievement());
-        $this->assertEquals(CommentsWrittenAchievement::TENTH, $user->currentCommentAchievement());
+        $this->assertEquals(LessonsWatchedAchievement::TWENTY_FIFTH, $user->latestLessonAchievement());
+        $this->assertEquals(CommentsWrittenAchievement::TENTH, $user->latestCommentAchievement());
         $this->assertEquals(new AchievementCollection([
             LessonsWatchedAchievement::FIFTIETH,
             CommentsWrittenAchievement::TWENTIETH,
-        ]), $user->nextAchievements());
+        ]), $user->nextAvailableAchievements());
     }
 
     /**
@@ -752,7 +752,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals(new AchievementCollection([]), $user->nextAchievements());
+        $this->assertEquals(new AchievementCollection([]), $user->nextAvailableAchievements());
     }
 
     /**

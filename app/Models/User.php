@@ -74,11 +74,11 @@ class User extends Authenticatable
     }
 
     /**
-     * The current lessons watched achievement.
+     * The last lesson achievement unlocked by the user.
      *
      * @return LessonsWatchedAchievement|null
      */
-    public function currentLessonAchievement(): ?LessonsWatchedAchievement
+    public function latestLessonAchievement(): ?LessonsWatchedAchievement
     {
         $totalWatched = $this->watched()->count();
 
@@ -86,11 +86,11 @@ class User extends Authenticatable
     }
 
     /**
-     * The current comments written achievement.
+     * The last comment achievement unlocked by the user.
      *
      * @return CommentsWrittenAchievement|null
      */
-    public function currentCommentAchievement(): ?CommentsWrittenAchievement
+    public function latestCommentAchievement(): ?CommentsWrittenAchievement
     {
         $totalComments = $this->comments()->count();
 
@@ -104,7 +104,7 @@ class User extends Authenticatable
      */
     public function unlockedLessonAchievements(): AchievementCollection
     {
-        $unlockedAchievements = $this->currentLessonAchievement()?->getAllUnlocked();
+        $unlockedAchievements = $this->latestLessonAchievement()?->getAllUnlocked();
 
         return $unlockedAchievements ?? new AchievementCollection();
     }
@@ -116,13 +116,13 @@ class User extends Authenticatable
      */
     public function unlockedCommentAchievements(): AchievementCollection
     {
-        $unlockedAchievements = $this->currentCommentAchievement()?->getAllUnlocked();
+        $unlockedAchievements = $this->latestCommentAchievement()?->getAllUnlocked();
 
         return $unlockedAchievements ?? new AchievementCollection();
     }
 
     /**
-     * All the unlocked achievements.
+     * All achievements that has been unlocked by the user.
      *
      * @return AchievementCollection
      */
@@ -138,9 +138,9 @@ class User extends Authenticatable
      *
      * @return LessonsWatchedAchievement|null
      */
-    public function nextLessonAchievement(): ?LessonsWatchedAchievement
+    public function nextAvailableLessonAchievement(): ?LessonsWatchedAchievement
     {
-        $currentAchievement = $this->currentLessonAchievement();
+        $currentAchievement = $this->latestLessonAchievement();
 
         if ($currentAchievement) {
             return $currentAchievement->getNext();
@@ -155,9 +155,9 @@ class User extends Authenticatable
      *
      * @return CommentsWrittenAchievement|null
      */
-    public function nextCommentAchievement(): ?CommentsWrittenAchievement
+    public function nextAvailableCommentAchievement(): ?CommentsWrittenAchievement
     {
-        $currentAchievement = $this->currentCommentAchievement();
+        $currentAchievement = $this->latestCommentAchievement();
 
         if ($currentAchievement) {
             return $currentAchievement->getNext();
@@ -172,19 +172,19 @@ class User extends Authenticatable
      *
      * @return AchievementCollection
      */
-    public function nextAchievements(): AchievementCollection
+    public function nextAvailableAchievements(): AchievementCollection
     {
-        $nextAchievements = [];
+        $nextAvailableAchievements = [];
 
-        if ($this->nextLessonAchievement()) {
-            $nextAchievements[] = $this->nextLessonAchievement();
+        if ($this->nextAvailableLessonAchievement()) {
+            $nextAvailableAchievements[] = $this->nextAvailableLessonAchievement();
         }
 
-        if ($this->nextCommentAchievement()) {
-            $nextAchievements[] = $this->nextCommentAchievement();
+        if ($this->nextAvailableCommentAchievement()) {
+            $nextAvailableAchievements[] = $this->nextAvailableCommentAchievement();
         }
 
-        return new AchievementCollection($nextAchievements);
+        return new AchievementCollection($nextAvailableAchievements);
     }
 
     /**
@@ -202,6 +202,8 @@ class User extends Authenticatable
     /**
      * The next available badge.
      *
+     * returns null if there are no more badges to unlock.
+     *
      * @return Badge|null
      */
     public function nextBadge(): ?Badge
@@ -209,6 +211,11 @@ class User extends Authenticatable
         return $this->badge()->getNext();
     }
 
+    /**
+     * The total achievements needed to unlock the next badge.
+     *
+     * @return int
+     */
     public function getTotalAchievementsNeededToUnlockNextBadge(): int
     {
         $nextBadge = $this->badge()->getNext();

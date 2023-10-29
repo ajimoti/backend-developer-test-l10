@@ -11,7 +11,7 @@ class AchievementsController extends Controller
     {
         return response()->json([
             'unlocked_achievements' => $user->unlockedAchievements()->castToArray('title'),
-            'next_available_achievements' => $user->nextAchievements()->castToArray('title'),
+            'next_available_achievements' => $user->nextAvailableAchievements()->castToArray('title'),
             'current_badge' => $user->badge()->getTitle(),
             'next_badge' =>  $user->nextBadge()->getTitle(),
             'remaining_to_unlock_next_badge' => $user->getTotalAchievementsNeededToUnlockNextBadge()

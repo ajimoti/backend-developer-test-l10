@@ -24,7 +24,11 @@ class CheckForNewBadgeTest extends TestCase
         $user = User::factory()->create();
 
         // Create 25 lessons and attach them to the user
-        // 25 watched lessons means the user has at least four achievements
+        // 25 watched lessons means the user has at least four achievements, namely the following:
+        // 1. First Lesson Watched
+        // 2. 5 Lessons Watched
+        // 3. 10 Lessons Watched
+        // 4. 25 Lessons Watched
         // which makes them eligible for the Intermediate badge
         $lessons = Lesson::factory()->count(25)->create();
         $user->lessons()->attach($lessons, ['watched' => true]);
