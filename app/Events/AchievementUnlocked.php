@@ -15,6 +15,9 @@ class AchievementUnlocked
 
     /**
      * Create a new event instance.
+     *
+     * @param string $achievementName
+     * @param User $user
      */
     public function __construct(string $achievementName, User $user)
     {

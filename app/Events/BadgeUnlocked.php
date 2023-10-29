@@ -15,6 +15,9 @@ class BadgeUnlocked
 
     /**
      * Create a new event instance.
+     *
+     * @param string $badgeName
+     * @param User $user
      */
     public function __construct(string $badgeName, User $user)
     {
